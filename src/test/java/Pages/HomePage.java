@@ -1,35 +1,42 @@
 package Pages;
 
+import Helpers.PageActions;
+import Helpers.Waitings;
+import io.qameta.allure.Step;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.Objects;
 
-
-public class HomePage {
+/**
+ * Класс pageObject Страница Home
+ * @author Alex Seburev
+ * @version 1.1
+ */
+public class HomePage extends PageActions {
 
     private WebDriver driver;
-    private JavascriptExecutor jse;
-    private Actions actions;
+    Waitings waitings;
 
+    /**
+     * Объект страницы Home
+     */
     public HomePage(WebDriver driver){
         this.driver = driver;
         this.jse = (JavascriptExecutor)driver;
         this.actions = new Actions(driver);
         PageFactory.initElements(driver, this);
+        waitings = new Waitings();
     }
 
     @FindBy(css = ".site-header-primary-section-right .ast-builder-menu-1")
     public WebElement header;
 
-    @FindBy(css = "#page > div.elementor.elementor-25361.elementor-location-footer.nitro-lazy-render > div > section > div.elementor-container.elementor-column-gap-default > div > div > section.elementor-section.elementor-inner-section.elementor-element.elementor-element-173a727c.elementor-section-boxed.elementor-section-height-default.elementor-section-height-default > div > div > div > div > div > h2")
+    @FindBy(xpath = "//section[2]/div/div/div/div/div/h2")
     public WebElement footer;
 
     @FindBy(css = "section.elementor-section.elementor-element-1e537621 h1")
@@ -47,37 +54,44 @@ public class HomePage {
     @FindBy(css = "section.elementor-element-166618a .pp-slider-arrow.swiper-button-prev")
     public WebElement courseSwiperPrev;
 
-
+    /**
+     * Функция проверки отображения элемента header
+     * @return возвращает булевое значение
+     */
+    @Step("Проверка что header отображается")
     public boolean headerCheck(){
         return header.isDisplayed();
     }
 
+    /**
+     * Функция проверки отображения элемента footer
+     * @return возвращает булевое значение
+     */
+    @Step("Проверка что footer отображается")
     public boolean footerCheck(){
         return footer.isDisplayed();
     }
 
-    public void scroll(int xPixels, int yPixels){
-        jse.executeScript("window.scrollBy(" +xPixels +"," +yPixels +")");
-    }
-
-    public void scroll2(int xPixels, int yPixels){
-        actions.scrollByAmount(xPixels, yPixels).build().perform();
-    }
-
-    public void scrollToTheBottom(){
-        jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-    }
-
-    public void closePopUp(){
+    /**
+     * Функция закрытие всплывающего окна
+     * @return возвращает объект страницы Home
+     */
+    @Step("Закрытие всплывающего окна")
+    public HomePage closePopUp(){
         headingTitle.click();
-        int waitTimeInSeconds = 3;
-        Duration waitTime = Duration.ofMillis(waitTimeInSeconds * 100000);
-        WebElement dynamicElement = (new WebDriverWait(driver, waitTime)
-                .until(ExpectedConditions.elementToBeClickable(closePopUpButton)));
+        waitings.waitTimeForElement(3, driver, closePopUpButton);
         closePopUpButton.click();
+        return this;
     }
 
-    public void swipe(String text, WebElement button){
+    /**
+     * Функция прокрутки элемента свайпера
+     * @param text - текст элемента на момент завершения прокрутки
+     * @param button - кнопка нажатия прокрутки
+     * @return возвращает объект страницы Home
+     */
+    @Step("Прокрутка элементов свайпера")
+    public HomePage swipe(String text, WebElement button){
         while (true){
             button.click();
             String swiperText = courseSwiper.getText();
@@ -85,5 +99,6 @@ public class HomePage {
                 break;
             }
         }
+        return this;
     }
 }
