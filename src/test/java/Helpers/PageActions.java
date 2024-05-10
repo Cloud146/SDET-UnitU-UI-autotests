@@ -9,13 +9,13 @@ public class PageActions {
     public JavascriptExecutor jse;
     public Actions actions;
 
-    @Step("Скролл страницы")
-    public void scroll(int xPixels, int yPixels) {
+    @Step("Скролл страницы c помощью JavascriptExecutor")
+    public void jseScroll(int xPixels, int yPixels) {
         jse.executeScript("window.scrollBy(" + xPixels + "," + yPixels + ")");
     }
 
-    @Step("Скролл страницы")
-    public void scroll2(int xPixels, int yPixels){
+    @Step("Скролл страницы c помощью Actions")
+    public void actionScroll(int xPixels, int yPixels){
         actions.scrollByAmount(xPixels, yPixels).build().perform();
     }
 

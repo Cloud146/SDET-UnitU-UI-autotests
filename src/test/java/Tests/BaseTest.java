@@ -1,6 +1,6 @@
 package Tests;
 
-import Helpers.InputData;
+import Helpers.ConfigurationProvider;
 import io.qameta.allure.Description;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
@@ -18,7 +18,7 @@ public class BaseTest {
         return driver;
     }
 
-    InputData inputData = new InputData();
+    ConfigurationProvider configurationProvider = new ConfigurationProvider();
 
     @Description("Открытие браузера с соответствующими настройками")
     @BeforeMethod
@@ -28,7 +28,7 @@ public class BaseTest {
                 .addArguments("--disable-gpu")
                 .addArguments("--disable-infobars")
                 .addArguments("--start-maximized"));
-        driver.manage().window().setSize(new Dimension(inputData.getScreenWidth(), inputData.getScreenHeight()));
+        driver.manage().window().setSize(new Dimension(configurationProvider.getScreenWidth(), configurationProvider.getScreenHeight()));
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 

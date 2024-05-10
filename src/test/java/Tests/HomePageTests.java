@@ -1,6 +1,6 @@
 package Tests;
 
-import Helpers.InputData;
+import Helpers.ConfigurationProvider;
 import Helpers.OutputData;
 import Helpers.Waitings;
 import Pages.HomePage;
@@ -21,19 +21,19 @@ public class HomePageTests extends BaseTest{
     private HomePage homePage;
 
     OutputData outputData = new OutputData();
-    InputData inputData = new InputData();
+    ConfigurationProvider configurationProvider = new ConfigurationProvider();
     Waitings waitings = new Waitings();
 
     @Story("Открытие страницы home")
     @BeforeMethod
     public void setup() throws IOException {
         driver = getDriver();
-        driver.get(inputData.getHomePageURL());
+        driver.get(configurationProvider.getHomePageURL());
         homePage = new HomePage(driver);
     }
 
     @Story("Отображение верхнего меню")
-    @Test(description = "Тест наличия верхнего меню", priority = 1, enabled = false)
+    @Test(description = "Тест наличия верхнего меню", priority = 1, enabled = true)
     public void headerCheckTest(){
         Assert.assertEquals(homePage.headerCheck(), true);
         Assert.assertEquals(homePage.header.getText(), outputData.headerText);
@@ -63,7 +63,7 @@ public class HomePageTests extends BaseTest{
     @Test(description = "Тест блока с курсами (слайдер)", priority = 3, enabled = true)
     public void courseSwapperTest(){
         homePage.closePopUp()
-                        .scroll2(0, 1100);
+                        .actionScroll(0, 1100);
         homePage.swipe(outputData.swiperTextAfterSwiping, homePage.courseSwiperNext);
         Assert.assertEquals(outputData.swiperTextAfterSwiping, homePage.courseSwiper.getText());
     }

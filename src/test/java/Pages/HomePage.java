@@ -33,25 +33,60 @@ public class HomePage extends PageActions {
         waitings = new Waitings();
     }
 
+    /**
+     * Локатор элемента header
+     * css = ".site-header-primary-section-right .ast-builder-menu-1"
+     * xpath = "//div[contains(@class, 'site-header-primary-section-right')]/div[contains(@class, 'ast-builder-menu-1')]"
+     */
     @FindBy(css = ".site-header-primary-section-right .ast-builder-menu-1")
     public WebElement header;
 
-    @FindBy(xpath = "//section[2]/div/div/div/div/div/h2")
+    /**
+     * * Локатор элемента footer
+     * css = ".elementor-element-7c212f0a h2"
+     * xpath = "//div[contains(@class, '7c212f0a')]//h2"
+     */
+    @FindBy(css = ".elementor-element-7c212f0a h2")
     public WebElement footer;
 
-    @FindBy(css = "section.elementor-section.elementor-element-1e537621 h1")
+    /**
+     * Локатор элемента headingTitle
+     * css = ".elementor-hidden-mobile h1"
+     * xpath = "//div[contains(@class, 'elementor-hidden-mobile')]//h1"
+     */
+    @FindBy(css = ".elementor-hidden-mobile h1")
     public WebElement headingTitle;
 
-    @FindBy(css = ".dialog-lightbox-close-button")
+    /**
+     * Локатор элемента closePopUpButton
+     * css = ".dialog-close-button"
+     * xpath = "//div[contains(@class, 'dialog-close-button')]"
+     */
+    @FindBy(css = ".dialog-close-button")
     public WebElement closePopUpButton;
 
-    @FindBy(css = ".elementor-section.elementor-element-166618a .elementor-container > div")
+    /**
+     * Локатор элемента courseSwiper
+     * css = ".elementor-element-166618a .elementor-column"
+     * xpath = "//section[contains(@class, '166618a')]//div[contains(@class, '50827c4')]"
+     */
+    @FindBy(css = ".elementor-element-166618a .elementor-column")
     public WebElement courseSwiper;
 
-    @FindBy(css = "section.elementor-element-166618a .pp-slider-arrow.swiper-button-next")
+    /**
+     * Локатор элемента courseSwiperNext
+     * css = ".swiper-button-next.swiper-button-next-c50f9f0"
+     * xpath = "//div[contains(@class, 'swiper-button-next-c50f9f0')]"
+     */
+    @FindBy(css = ".swiper-button-next.swiper-button-next-c50f9f0")
     public WebElement courseSwiperNext;
 
-    @FindBy(css = "section.elementor-element-166618a .pp-slider-arrow.swiper-button-prev")
+    /**
+     * Локатор элемента courseSwiperPrev
+     * css = ".swiper-button-prev.swiper-button-prev-c50f9f0"
+     * xpath = "//div[contains(@class, 'swiper-button-prev-c50f9f0')]"
+     */
+    @FindBy(css = ".swiper-button-prev.swiper-button-prev-c50f9f0")
     public WebElement courseSwiperPrev;
 
     /**
