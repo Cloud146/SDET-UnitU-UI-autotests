@@ -28,9 +28,9 @@ public class HomePageTests extends BaseTest{
 
 
     @Story("Открытие страницы home")
-    @Severity(SeverityLevel.NORMAL)
+    @Severity(SeverityLevel.BLOCKER)
     @BeforeMethod
-    public void setup() throws IOException {
+    public void openHomePage() throws IOException {
         driver = getDriver();
         driver.get(configurationProvider.getHomePageURL());
         homePage = new HomePage(driver);

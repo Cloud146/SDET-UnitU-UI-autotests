@@ -22,7 +22,7 @@ public class BaseTest {
 
     @Description("Открытие браузера с соответствующими настройками")
     @BeforeMethod
-    public void setUp() throws IOException {
+    public void browserSetUp() throws IOException {
         driver = new ChromeDriver(new ChromeOptions()
                 .addArguments("--remote-allow-origins=**")
                 .addArguments("--disable-gpu")
@@ -34,7 +34,7 @@ public class BaseTest {
 
     @Description("Закрытие браузера")
     @AfterMethod
-    public void tearDown() {
+    public void browserTearDown() {
         if (driver != null) {
             driver.quit();
         }
