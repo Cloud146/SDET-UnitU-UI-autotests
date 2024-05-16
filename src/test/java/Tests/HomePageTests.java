@@ -6,6 +6,8 @@ import Helpers.Waitings;
 import Pages.HomePage;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -24,15 +26,18 @@ public class HomePageTests extends BaseTest{
     ConfigurationProvider configurationProvider = new ConfigurationProvider();
     Waitings waitings = new Waitings();
 
+
     @Story("Открытие страницы home")
+    @Severity(SeverityLevel.BLOCKER)
     @BeforeMethod
-    public void setup() throws IOException {
+    public void openHomePage() throws IOException {
         driver = getDriver();
         driver.get(configurationProvider.getHomePageURL());
         homePage = new HomePage(driver);
     }
 
     @Story("Отображение верхнего меню")
+    @Severity(SeverityLevel.CRITICAL)
     @Test(description = "Тест наличия верхнего меню", priority = 1, enabled = true)
     public void headerCheckTest(){
         Assert.assertEquals(homePage.headerCheck(), true);
@@ -40,6 +45,7 @@ public class HomePageTests extends BaseTest{
     }
 
     @Story("Отображение нижнего меню")
+    @Severity(SeverityLevel.CRITICAL)
     @Test(description = "Тест наличия футера", priority = 2, enabled = true)
     public void footerCheckTest(){
         homePage.closePopUp()
@@ -50,6 +56,7 @@ public class HomePageTests extends BaseTest{
 
 
     @Story("Отображение верхнего меню после скролла")
+    @Severity(SeverityLevel.NORMAL)
     @Test(description = "Тест наличия верхнего меню после скролла", priority = 4, enabled = true)
     public void headerCheckAfterScrollingTest(){
         homePage.closePopUp()
@@ -58,8 +65,9 @@ public class HomePageTests extends BaseTest{
         Assert.assertEquals(homePage.headerCheck(), true);
         Assert.assertEquals(homePage.header.getText(), outputData.headerText);
     }
-
+    
     @Story("Отображение блока курсов при прокрутке слайдера")
+    @Severity(SeverityLevel.NORMAL)
     @Test(description = "Тест блока с курсами (слайдер)", priority = 3, enabled = true)
     public void courseSwapperTest(){
         homePage.closePopUp()
