@@ -1,6 +1,8 @@
 package Tests;
 
 import Helpers.ConfigurationProvider;
+import Helpers.OutputData;
+import Helpers.Waitings;
 import io.qameta.allure.Description;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
@@ -14,11 +16,13 @@ import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
     private WebDriver driver;
+    OutputData outputData = new OutputData();
+    Waitings waitings = new Waitings();
+    ConfigurationProvider configurationProvider = new ConfigurationProvider();
+
     public WebDriver getDriver(){
         return driver;
     }
-
-    ConfigurationProvider configurationProvider = new ConfigurationProvider();
 
     @Description("Открытие браузера с соответствующими настройками")
     @BeforeMethod
