@@ -19,4 +19,9 @@ public class OutputData {
             "Get Started\n" +
             "Cypress - Learn In-depth implementation on live projects\n" +
             "Get Started";
+
+    public String loggedInText = "You're logged in!!";
+
+    public String errorLabelText = "Username or password is incorrect";
+
 }

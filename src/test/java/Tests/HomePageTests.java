@@ -1,8 +1,5 @@
 package Tests;
 
-import Helpers.ConfigurationProvider;
-import Helpers.OutputData;
-import Helpers.Waitings;
 import Pages.HomePage;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -21,11 +18,6 @@ import java.io.IOException;
 public class HomePageTests extends BaseTest{
     private WebDriver driver;
     private HomePage homePage;
-
-    OutputData outputData = new OutputData();
-    ConfigurationProvider configurationProvider = new ConfigurationProvider();
-    Waitings waitings = new Waitings();
-
 
     @Story("Открытие страницы home")
     @Severity(SeverityLevel.BLOCKER)
