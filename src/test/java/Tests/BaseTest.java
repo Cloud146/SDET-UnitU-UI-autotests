@@ -2,12 +2,14 @@ package Tests;
 
 import Helpers.ConfigurationProvider;
 import Helpers.OutputData;
+import Helpers.PageActions;
 import Helpers.Waitings;
 import io.qameta.allure.Description;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
@@ -36,9 +38,13 @@ public class BaseTest {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
-    @Description("Закрытие браузера")
+
+    @Description("Закрытие браузера/Проверка выполнения теста")
     @AfterMethod
-    public void browserTearDown() {
+    public void browserTearDown(ITestResult result) throws IOException {
+        if (result.getStatus() == ITestResult.FAILURE) {
+            PageActions.takeScreenshot(driver, configurationProvider.getScreenshotPath());
+        }
         if (driver != null) {
             driver.quit();
         }

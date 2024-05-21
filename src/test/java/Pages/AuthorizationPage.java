@@ -64,7 +64,7 @@ public class AuthorizationPage {
      * @param username - текст ввода
      * @return возвращает объект страницы Authorization
      */
-    @Step("Ввода текста в поле username")
+    @Step("Ввод текста в поле username")
     public AuthorizationPage enterUsername(String username){
         usernameField.sendKeys(username);
         return this;
@@ -75,7 +75,7 @@ public class AuthorizationPage {
      * @param password - текст ввода
      * @return возвращает объект страницы Authorization
      */
-    @Step("Ввода текста в поле password")
+    @Step("Ввод текста в поле password")
     public AuthorizationPage enterPassword(String password){
         passwordField.sendKeys(password);
         return this;
@@ -86,7 +86,7 @@ public class AuthorizationPage {
      * @param description - текст ввода
      * @return возвращает объект страницы Authorization
      */
-    @Step("Ввода текста в поле description")
+    @Step("Ввод текста в поле description")
     public AuthorizationPage enterDescription(String description){
         descriptionField.sendKeys(description);
         return this;
@@ -96,7 +96,7 @@ public class AuthorizationPage {
      * Функция нажатия кнопки Login
      * @return возвращает объект страницы Authorization
      */
-    @Step("Нажатия кнопки Login")
+    @Step("Нажатие кнопки Login")
     public AuthorizationPage clickLoginButton(){
         loginButton.click();
         return this;

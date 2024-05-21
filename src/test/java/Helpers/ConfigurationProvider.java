@@ -20,5 +20,9 @@ public class ConfigurationProvider {
     public Integer getScreenHeight() throws IOException {
         return Integer.parseInt(ConfigurationManager.getInstance().getProperty("screen.height"));
     }
+
+    public String getScreenshotPath() throws IOException {
+        return ConfigurationManager.getInstance().getProperty("screenshot.path");
+    }
 }
 

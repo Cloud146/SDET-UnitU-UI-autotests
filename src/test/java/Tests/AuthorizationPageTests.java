@@ -1,16 +1,18 @@
 package Tests;
 
 import Pages.AuthorizationPage;
-import org.openqa.selenium.WebDriver;
+
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
 
 import java.io.IOException;
 
@@ -27,6 +29,7 @@ public class AuthorizationPageTests extends BaseTest {
         driver = getDriver();
         driver.get(configurationProvider.getAuthorizationPageURL());
         authorizationPage = new AuthorizationPage(driver);
+
     }
 
     @DataProvider(name = "loginUsersData")
@@ -44,9 +47,9 @@ public class AuthorizationPageTests extends BaseTest {
         };
     }
 
-    @Story("Авторизация с различными данными ввода")
+    @Story("Авторизация с неправильными данными ввода")
     @Severity(SeverityLevel.CRITICAL)
-    @Test(description = "Тест авторизации различных данных ввода", dataProvider = "loginUsersData")
+    @Test(description = "Тест авторизации различных данных ввода", dataProvider = "loginUsersData", enabled = true)
     public void authorizationTest(String username, String password, String description, boolean isSuccessful){
         authorizationPage.authorization(username, password, description);
         if (isSuccessful) {
@@ -55,9 +58,14 @@ public class AuthorizationPageTests extends BaseTest {
             Assert.assertEquals(authorizationPage.alertLabel.getText(), outputData.errorLabelText);
         }
         else {
-            //driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
             waitings.waitForVisibility(driver, authorizationPage.loginButton, 100);
             Assert.assertEquals(authorizationPage.loginButton.isEnabled(), false);
         }
+    }
+
+    @Test(description = "Тест авторизации различных данных ввода", enabled = true)
+    public void unsuccessfulAuthorizationTest() throws IOException {
+            authorizationPage.authorization("user1", "password1", "description1");
+            Assert.assertEquals(authorizationPage.loggedInLabel.getText(),outputData.loggedInText);
     }
 }
