@@ -32,7 +32,7 @@ public class HomePageTests extends BaseTest{
     @Severity(SeverityLevel.CRITICAL)
     @Test(description = "Тест наличия верхнего меню", priority = 1, enabled = true)
     public void headerCheckTest(){
-        Assert.assertEquals(homePage.headerCheck(), false);
+        Assert.assertEquals(homePage.headerCheck(), true);
         Assert.assertEquals(homePage.header.getText(), outputData.headerText);
     }
 

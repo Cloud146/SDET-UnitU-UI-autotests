@@ -37,12 +37,11 @@ public class PageActions {
 
 
     @Step("Сделать скриншот страницы")
-    public static void takeScreenshot(WebDriver driver, String filePath) {
+    public static void takeScreenshot(WebDriver driver) {
         Screenshot screenshot = new AShot()
                 .shootingStrategy(ShootingStrategies.viewportPasting(1000))
                 .takeScreenshot(driver);
         try {
-            ImageIO.write(screenshot.getImage(), "PNG", new File(filePath));
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ImageIO.write(screenshot.getImage(), "PNG", baos);
             byte[] imageBytes = baos.toByteArray();

@@ -43,7 +43,7 @@ public class BaseTest {
     @AfterMethod
     public void browserTearDown(ITestResult result) throws IOException {
         if (result.getStatus() == ITestResult.FAILURE) {
-            PageActions.takeScreenshot(driver, configurationProvider.getScreenshotPath());
+            PageActions.takeScreenshot(driver);
         }
         if (driver != null) {
             driver.quit();
