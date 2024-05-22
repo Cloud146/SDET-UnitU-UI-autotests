@@ -1,8 +1,19 @@
 package Helpers;
 
+import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
+import ru.yandex.qatools.ashot.AShot;
+import ru.yandex.qatools.ashot.Screenshot;
+import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
+
+import javax.imageio.ImageIO;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 
 public class PageActions {
 
@@ -22,5 +33,21 @@ public class PageActions {
     @Step("Скролл в низ страницы")
     public void scrollToTheBottom(){
         jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+    }
+
+
+    @Step("Сделать скриншот страницы")
+    public static void takeScreenshot(WebDriver driver) {
+        Screenshot screenshot = new AShot()
+                .shootingStrategy(ShootingStrategies.viewportPasting(1000))
+                .takeScreenshot(driver);
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(screenshot.getImage(), "PNG", baos);
+            byte[] imageBytes = baos.toByteArray();
+            Allure.addAttachment("Screenshot", new ByteArrayInputStream(imageBytes));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
