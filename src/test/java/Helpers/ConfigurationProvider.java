@@ -20,5 +20,13 @@ public class ConfigurationProvider {
     public Integer getScreenHeight() throws IOException {
         return Integer.parseInt(ConfigurationManager.getInstance().getProperty("screen.height"));
     }
+
+    public String getSqlExercisesPageURL() throws IOException {
+        return ConfigurationManager.getInstance().getProperty("sql.exercises.url");
+    }
+
+    public String getCookieFilePath() throws IOException {
+        return ConfigurationManager.getInstance().getProperty("cookie.file.path");
+    }
 }
 
