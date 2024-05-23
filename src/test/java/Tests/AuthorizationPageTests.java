@@ -62,7 +62,8 @@ public class AuthorizationPageTests extends BaseTest {
             Assert.assertEquals(authorizationPage.loginButton.isEnabled(), false);
         }
     }
-
+    @Story("Авторизация с неправильными данными")
+    @Severity(SeverityLevel.CRITICAL)
     @Test(description = "Тест авторизации неправильных данных ввода", enabled = true)
     public void unsuccessfulAuthorizationTest() throws IOException {
             authorizationPage.authorization("user1", "password1", "description1");
