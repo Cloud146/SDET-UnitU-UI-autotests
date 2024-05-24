@@ -59,7 +59,7 @@ public class AuthorizationPageTests extends BaseTest {
         }
         else {
             waitings.waitForVisibility(driver, authorizationPage.loginButton, 100);
-            Assert.assertEquals(authorizationPage.loginButton.isEnabled(), false);
+            Assert.assertFalse(authorizationPage.loginButton.isEnabled(), "Login button is disabled");
         }
     }
     @Story("Авторизация с неправильными данными")

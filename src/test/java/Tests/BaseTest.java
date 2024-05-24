@@ -21,6 +21,7 @@ public class BaseTest {
     OutputData outputData = new OutputData();
     Waitings waitings = new Waitings();
     ConfigurationProvider configurationProvider = new ConfigurationProvider();
+    PageActions pageActions = new PageActions();
 
     public WebDriver getDriver(){
         return driver;
@@ -41,7 +42,7 @@ public class BaseTest {
 
     @Description("Закрытие браузера/Проверка выполнения теста")
     @AfterMethod
-    public void browserTearDown(ITestResult result) throws IOException {
+    public void browserTearDown(ITestResult result){
         if (result.getStatus() == ITestResult.FAILURE) {
             PageActions.takeScreenshot(driver);
         }
