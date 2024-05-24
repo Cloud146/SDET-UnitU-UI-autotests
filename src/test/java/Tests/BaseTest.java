@@ -42,7 +42,7 @@ public class BaseTest {
 
     @Description("Закрытие браузера/Проверка выполнения теста")
     @AfterMethod
-    public void browserTearDown(ITestResult result) throws IOException {
+    public void browserTearDown(ITestResult result){
         if (result.getStatus() == ITestResult.FAILURE) {
             PageActions.takeScreenshot(driver);
         }

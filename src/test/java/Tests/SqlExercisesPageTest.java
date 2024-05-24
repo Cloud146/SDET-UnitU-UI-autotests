@@ -59,13 +59,13 @@ public class SqlExercisesPageTest extends BaseTest{
     public void clickAndBlurInputFieldTest(){
         sqlExercisesPage.loginField.click();
         pageActions.blurInputField(driver, sqlExercisesPage.loginField);
-        Assert.assertFalse(pageActions.checkCursorInInputField(driver, sqlExercisesPage.loginField));
+        Assert.assertFalse(pageActions.checkCursorInInputField(driver, sqlExercisesPage.loginField), "Input field is focused");
     }
 
     @Story("Вертикальный скрол")
     @Severity(SeverityLevel.NORMAL)
     @Test(description = "Проверка наличия вертикального скрола на странице", priority = 4, enabled = true)
     public void checkForVerticalScrollTest(){
-        Assert.assertTrue(pageActions.checkVerticalScroll(driver));
+        Assert.assertTrue(pageActions.checkVerticalScroll(driver), "Vertical scroll not found");
     }
 }
