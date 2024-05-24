@@ -4,6 +4,7 @@ import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
@@ -51,7 +52,6 @@ public class PageActions {
         jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
     }
 
-
     /**
      * Функция создания скриншота всей страницы
      * @param driver = объект вебдрайвера
@@ -69,5 +69,45 @@ public class PageActions {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Функция сброса фокуса из поля ввода
+     * @param driver = объект вебдрайвера
+     * @param inputField = элемент поля ввода
+     * */
+    @Step("Сброс фокуса из поля ввода")
+    public void blurInputField(WebDriver driver,WebElement inputField) {
+        jse = (JavascriptExecutor) driver;
+        jse.executeScript("arguments[0].blur();", inputField);
+    }
+
+    /**
+     * Функция проверки наличия вертикального скрола на странице
+     * @param driver = объект вебдрайвера
+     * @return возвращает булевое значение
+     * */
+    @Step("Проверка наличия вертикального скрола")
+    public boolean checkVerticalScroll(WebDriver driver) {
+        jse = (JavascriptExecutor) driver;
+        Boolean hasVerticalScroll = (Boolean) jse.executeScript(
+                "return document.documentElement.scrollHeight > document.documentElement.clientHeight;"
+        );
+        return hasVerticalScroll != null && hasVerticalScroll;
+    }
+
+    /**
+     * Функция проверки наличия курсора в поле ввода
+     * @param driver = объект вебдрайвера
+     * @param inputField = элемент поля ввода
+     * @return возвращает булевое значение
+     * */
+    @Step("Проверки наличия курсора в поле ввода")
+    public boolean checkCursorInInputField(WebDriver driver, WebElement inputField) {
+        jse = (JavascriptExecutor) driver;
+        Boolean isFocused = (Boolean) jse.executeScript(
+                "return document.activeElement === arguments[0];", inputField
+        );
+        return isFocused != null && isFocused;
     }
 }

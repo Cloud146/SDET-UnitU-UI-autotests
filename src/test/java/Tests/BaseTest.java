@@ -21,6 +21,7 @@ public class BaseTest {
     OutputData outputData = new OutputData();
     Waitings waitings = new Waitings();
     ConfigurationProvider configurationProvider = new ConfigurationProvider();
+    PageActions pageActions = new PageActions();
 
     public WebDriver getDriver(){
         return driver;
