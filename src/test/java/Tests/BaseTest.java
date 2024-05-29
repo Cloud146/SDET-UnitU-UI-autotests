@@ -1,12 +1,11 @@
 package Tests;
 
 
-import Helpers.ConfigurationProvider;
-import Helpers.OutputData;
-import Helpers.PageActions;
-import Helpers.Waitings;
+import Helpers.*;
 import io.qameta.allure.Description;
+import org.checkerframework.checker.units.qual.C;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -27,24 +26,27 @@ public class BaseTest {
     ConfigurationProvider configurationProvider = new ConfigurationProvider();
     PageActions pageActions = new PageActions();
 
+    //private RemoteWebDriver driver;
+    DesiredCapabilities capabilities;
+    public CapabilityFactory capabilityFactory = new CapabilityFactory();
+
     public WebDriver getDriver(){
         return driver;
     }
 
     @Description("Открытие браузера с соответствующими настройками")
-    @BeforeMethod
+    @BeforeMethod(enabled = false)
     public void browserSetUp() throws IOException {
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setBrowserName("chrome");
-        driver = new RemoteWebDriver(new URL("http://172.30.112.1:4444/wd/hub"), capabilities);
+        driver = new ChromeDriver(OptionsManager.getChromeOptions());
+        driver.manage().window().setSize(new Dimension(configurationProvider.getScreenWidth(), configurationProvider.getScreenHeight()));
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    }
 
-//        driver = new ChromeDriver(new ChromeOptions()
-//                .addArguments("--remote-allow-origins=**")
-//                .addArguments("--disable-gpu")
-//                .addArguments("--disable-infobars")
-//                .addArguments("--start-maximized"));
-//        driver.manage().window().setSize(new Dimension(configurationProvider.getScreenWidth(), configurationProvider.getScreenHeight()));
-//        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    @Description("СетАп для параллельного тестирования")
+    @BeforeMethod(enabled = true)
+    public void parallelSetUp() throws IOException {
+        capabilities = new DesiredCapabilities();
+        driver = new RemoteWebDriver(new URL(configurationProvider.getGridHubURL()), capabilityFactory.getCapabilities());
     }
 
 

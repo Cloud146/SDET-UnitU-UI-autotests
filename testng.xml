@@ -11,4 +11,9 @@
             <class name="Tests.AuthorizationPageTests"/>
         </classes>
     </test>
+    <test name="Test3">
+        <classes>
+            <class name="Tests.SqlExercisesPageTest"/>
+        </classes>
+    </test>
 </suite>
