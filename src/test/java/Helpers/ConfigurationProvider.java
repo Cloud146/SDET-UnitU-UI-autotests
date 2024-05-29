@@ -28,5 +28,9 @@ public class ConfigurationProvider {
     public String getCookieFilePath() throws IOException {
         return ConfigurationManager.getInstance().getProperty("cookie.file.path");
     }
+
+    public String getGridHubURL() throws IOException {
+        return ConfigurationManager.getInstance().getProperty("grid.hub.url");
+    }
 }
 
