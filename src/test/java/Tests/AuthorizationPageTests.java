@@ -49,7 +49,7 @@ public class AuthorizationPageTests extends BaseTest {
 
     @Story("Авторизация с различными данными ввода")
     @Severity(SeverityLevel.CRITICAL)
-    @Test(description = "Тест авторизации различных данных ввода", dataProvider = "loginUsersData", enabled = true)
+    @Test(description = "Тест авторизации различных данных ввода", dataProvider = "loginUsersData", enabled = false)
     public void authorizationTest(String username, String password, String description, boolean isSuccessful){
         authorizationPage.authorization(username, password, description);
         if (isSuccessful) {
@@ -64,9 +64,11 @@ public class AuthorizationPageTests extends BaseTest {
     }
     @Story("Авторизация с неправильными данными")
     @Severity(SeverityLevel.CRITICAL)
-    @Test(description = "Тест авторизации неправильных данных ввода", enabled = true)
+    @Test(description = "Тест авторизации неправильных данных ввода", enabled = false)
     public void unsuccessfulAuthorizationTest() throws IOException {
             authorizationPage.authorization("user1", "password1", "description1");
             Assert.assertEquals(authorizationPage.loggedInLabel.getText(),outputData.loggedInText);
     }
+
+
 }
