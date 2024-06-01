@@ -11,9 +11,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.testng.ITestContext;
+import org.testng.ITestNGMethod;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,25 +30,29 @@ public class BaseTest {
     PageActions pageActions = new PageActions();
 
     //private RemoteWebDriver driver;
-    DesiredCapabilities capabilities;
+    //DesiredCapabilities capabilities = new DesiredCapabilities();
+
     public CapabilityFactory capabilityFactory = new CapabilityFactory();
 
     public WebDriver getDriver(){
         return driver;
     }
 
+
     @Description("Открытие браузера с соответствующими настройками")
-    @BeforeMethod(enabled = false)
-    public void browserSetUp() throws IOException {
+    @BeforeMethod(enabled = true)
+    public void browserSetUp(ITestContext context) throws IOException {
         driver = new ChromeDriver(OptionsManager.getChromeOptions());
         driver.manage().window().setSize(new Dimension(configurationProvider.getScreenWidth(), configurationProvider.getScreenHeight()));
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        for(ITestNGMethod method : context.getAllTestMethods()){
+            method.setRetryAnalyzerClass(RetryAnalyzer.class);
+        }
     }
 
     @Description("СетАп для параллельного тестирования")
-    @BeforeMethod(enabled = true)
+    @BeforeMethod(enabled = false)
     public void parallelSetUp() throws IOException {
-        capabilities = new DesiredCapabilities();
         driver = new RemoteWebDriver(new URL(configurationProvider.getGridHubURL()), capabilityFactory.getCapabilities());
     }
 

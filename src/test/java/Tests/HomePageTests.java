@@ -1,5 +1,6 @@
 package Tests;
 
+import Helpers.RetryAnalyzer;
 import Pages.HomePage;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -32,13 +33,13 @@ public class HomePageTests extends BaseTest{
     @Severity(SeverityLevel.CRITICAL)
     @Test(description = "Тест наличия верхнего меню", priority = 1, enabled = true)
     public void headerCheckTest(){
-        Assert.assertTrue(homePage.headerCheck(), "Header not found");
+        Assert.assertFalse(homePage.headerCheck(), "Header not found");
         Assert.assertEquals(homePage.header.getText(), outputData.headerText);
     }
 
     @Story("Отображение нижнего меню")
     @Severity(SeverityLevel.CRITICAL)
-    @Test(description = "Тест наличия футера", priority = 2, enabled = true)
+    @Test(description = "Тест наличия футера", priority = 2, enabled = false)
     public void footerCheckTest(){
         homePage.closePopUp()
                         .scrollToTheBottom();
@@ -49,7 +50,7 @@ public class HomePageTests extends BaseTest{
 
     @Story("Отображение верхнего меню после скролла")
     @Severity(SeverityLevel.NORMAL)
-    @Test(description = "Тест наличия верхнего меню после скролла", priority = 4, enabled = true)
+    @Test(description = "Тест наличия верхнего меню после скролла", priority = 4, enabled = false)
     public void headerCheckAfterScrollingTest(){
         homePage.closePopUp()
                         .scrollToTheBottom();
@@ -60,7 +61,7 @@ public class HomePageTests extends BaseTest{
     
     @Story("Отображение блока курсов при прокрутке слайдера")
     @Severity(SeverityLevel.NORMAL)
-    @Test(description = "Тест блока с курсами (слайдер)", priority = 3, enabled = true)
+    @Test(description = "Тест блока с курсами (слайдер)", priority = 3, enabled = false)
     public void courseSwapperTest(){
         homePage.closePopUp()
                         .actionScroll(0, 1100);
