@@ -2,6 +2,8 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="ParallelSuite" parallel="tests" thread-count="2">
     <test name="Test1">
+        <parameter name="browser" value="${browser}"/>
+        <parameter name="gridURL" value="${gridURL}"/>
         <classes>
             <class name="Tests.HomePageTests"/>
         </classes>

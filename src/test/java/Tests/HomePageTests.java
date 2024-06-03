@@ -39,7 +39,7 @@ public class HomePageTests extends BaseTest{
 
     @Story("Отображение нижнего меню")
     @Severity(SeverityLevel.CRITICAL)
-    @Test(description = "Тест наличия футера", priority = 2, enabled = false)
+    @Test(description = "Тест наличия футера", priority = 2, enabled = true)
     public void footerCheckTest(){
         homePage.closePopUp()
                         .scrollToTheBottom();
@@ -50,7 +50,7 @@ public class HomePageTests extends BaseTest{
 
     @Story("Отображение верхнего меню после скролла")
     @Severity(SeverityLevel.NORMAL)
-    @Test(description = "Тест наличия верхнего меню после скролла", priority = 4, enabled = false)
+    @Test(description = "Тест наличия верхнего меню после скролла", priority = 4, enabled = true)
     public void headerCheckAfterScrollingTest(){
         homePage.closePopUp()
                         .scrollToTheBottom();
@@ -61,7 +61,7 @@ public class HomePageTests extends BaseTest{
     
     @Story("Отображение блока курсов при прокрутке слайдера")
     @Severity(SeverityLevel.NORMAL)
-    @Test(description = "Тест блока с курсами (слайдер)", priority = 3, enabled = false)
+    @Test(description = "Тест блока с курсами (слайдер)", priority = 3, enabled = true)
     public void courseSwapperTest(){
         homePage.closePopUp()
                         .actionScroll(0, 1100);

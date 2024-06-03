@@ -1,10 +1,15 @@
 package Helpers;
 
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.ie.InternetExplorerOptions;
+
+import java.io.IOException;
 
 public class OptionsManager {
 
-    public static ChromeOptions getChromeOptions() {
+    static ConfigurationProvider configurationProvider = new ConfigurationProvider();
+
+    public static ChromeOptions getChromeOptions() throws IOException {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized")
                 .addArguments("--ignore-certificate-errors")
@@ -12,9 +17,16 @@ public class OptionsManager {
                 .addArguments("--remote-allow-origins=**")
                 .addArguments("--disable-infobars");
 //                .addArguments("--incognito");
-        options.setCapability("browserVersion", "125.0.6422.78");
+        options.setCapability("browserVersion", configurationProvider.getChromeVersion());
         options.setCapability("platformName", "Windows");
-        options.setBrowserVersion("125.0.6422.78");
+        options.setBrowserVersion(configurationProvider.getChromeVersion());
+        return options;
+    }
+
+    public static InternetExplorerOptions getIEOptions(){
+        InternetExplorerOptions options = new InternetExplorerOptions();
+        options.ignoreZoomSettings();
+        options.introduceFlakinessByIgnoringSecurityDomains();
         return options;
     }
 }

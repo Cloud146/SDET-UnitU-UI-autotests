@@ -1,14 +1,9 @@
 package Tests;
 
-
 import Helpers.*;
 import io.qameta.allure.Description;
-import org.checkerframework.checker.units.qual.C;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestContext;
@@ -16,7 +11,7 @@ import org.testng.ITestNGMethod;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
+
 
 import java.io.IOException;
 import java.net.URL;
@@ -41,8 +36,8 @@ public class BaseTest {
 
     @Description("Открытие браузера с соответствующими настройками")
     @BeforeMethod(enabled = true)
-    public void browserSetUp(ITestContext context) throws IOException {
-        driver = new ChromeDriver(OptionsManager.getChromeOptions());
+    public void browserSetUp(ITestContext context) throws IOException, IllegalAccessException {
+        driver = DriverFactory.getWebDriver("chrome");
         driver.manage().window().setSize(new Dimension(configurationProvider.getScreenWidth(), configurationProvider.getScreenHeight()));
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         for(ITestNGMethod method : context.getAllTestMethods()){
