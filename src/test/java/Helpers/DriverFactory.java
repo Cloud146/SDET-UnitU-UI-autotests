@@ -8,12 +8,13 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 public class DriverFactory extends  OptionsManager{
 
-    public static WebDriver getWebDriver(String browser) throws IllegalAccessException {
+    public static WebDriver getWebDriver(String browser) throws IllegalAccessException, IOException {
         WebDriver driver;
         DesiredCapabilities capabilities = new DesiredCapabilities();
 

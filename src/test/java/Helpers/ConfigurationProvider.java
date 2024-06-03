@@ -32,5 +32,9 @@ public class ConfigurationProvider {
     public String getGridHubURL() throws IOException {
         return ConfigurationManager.getInstance().getProperty("grid.hub.url");
     }
+
+    public String getChromeVersion() throws IOException {
+        return ConfigurationManager.getInstance().getProperty("chrome.version");
+    }
 }
 
