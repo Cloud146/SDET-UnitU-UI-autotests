@@ -41,8 +41,8 @@ public class BaseTest {
 
     @Description("Открытие браузера с соответствующими настройками")
     @BeforeMethod(enabled = true)
-    public void browserSetUp(ITestContext context) throws IOException {
-        driver = new ChromeDriver(OptionsManager.getChromeOptions());
+    public void browserSetUp(ITestContext context) throws IOException, IllegalAccessException {
+        driver = DriverFactory.getWebDriver("firefox");
         driver.manage().window().setSize(new Dimension(configurationProvider.getScreenWidth(), configurationProvider.getScreenHeight()));
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         for(ITestNGMethod method : context.getAllTestMethods()){

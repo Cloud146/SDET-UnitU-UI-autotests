@@ -1,6 +1,7 @@
 package Helpers;
 
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.ie.InternetExplorerOptions;
 
 public class OptionsManager {
 
@@ -15,6 +16,13 @@ public class OptionsManager {
         options.setCapability("browserVersion", "125.0.6422.78");
         options.setCapability("platformName", "Windows");
         options.setBrowserVersion("125.0.6422.78");
+        return options;
+    }
+
+    public static InternetExplorerOptions getIEOptions(){
+        InternetExplorerOptions options = new InternetExplorerOptions();
+        options.ignoreZoomSettings();
+        options.introduceFlakinessByIgnoringSecurityDomains();
         return options;
     }
 }

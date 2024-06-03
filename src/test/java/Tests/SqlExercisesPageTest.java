@@ -34,7 +34,7 @@ public class SqlExercisesPageTest extends BaseTest{
 
     @Story("Сохранения cookie авторизированного пользователя")
     @Severity(SeverityLevel.CRITICAL)
-    @Test(description = "Тест авторизации пользователя и сохранения его cookie в файл", priority = 1, enabled = false)
+    @Test(description = "Тест авторизации пользователя и сохранения его cookie в файл", priority = 1, enabled = true)
     public void loginAndSaveCookieTest() throws IOException {
         sqlExercisesPage.authorization("loginTest1", "sqlTest1");
         Assert.assertEquals(sqlExercisesPage.usernameCheck(), "userTest1");
@@ -45,7 +45,7 @@ public class SqlExercisesPageTest extends BaseTest{
 
     @Story("Загрузка cookie авторизированного пользователя")
     @Severity(SeverityLevel.CRITICAL)
-    @Test(description = "Тест загрузки cookie авторизированного пользователя из файла", priority = 2, enabled = false)
+    @Test(description = "Тест загрузки cookie авторизированного пользователя из файла", priority = 2, enabled = true)
     public void loginWithSavedCookieTest() throws IOException{
         driver.manage().deleteAllCookies();
         CookieUtils.loadCookiesFromFile(driver, configurationProvider.getCookieFilePath());
@@ -55,7 +55,7 @@ public class SqlExercisesPageTest extends BaseTest{
 
     @Story("Поле ввода login")
     @Severity(SeverityLevel.NORMAL)
-    @Test(description = "Тест сброса фокуса из выбранного поля ввода", priority = 3, enabled = false)
+    @Test(description = "Тест сброса фокуса из выбранного поля ввода", priority = 3, enabled = true)
     public void clickAndBlurInputFieldTest(){
         sqlExercisesPage.loginField.click();
         pageActions.blurInputField(driver, sqlExercisesPage.loginField);
@@ -64,7 +64,7 @@ public class SqlExercisesPageTest extends BaseTest{
 
     @Story("Вертикальный скрол")
     @Severity(SeverityLevel.NORMAL)
-    @Test(description = "Проверка наличия вертикального скрола на странице", priority = 4, enabled = false)
+    @Test(description = "Проверка наличия вертикального скрола на странице", priority = 4, enabled = true)
     public void checkForVerticalScrollTest(){
         Assert.assertTrue(pageActions.checkVerticalScroll(driver), "Vertical scroll not found");
     }
