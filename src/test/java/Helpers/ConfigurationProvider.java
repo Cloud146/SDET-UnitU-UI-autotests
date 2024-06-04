@@ -36,5 +36,9 @@ public class ConfigurationProvider {
     public String getChromeVersion() throws IOException {
         return ConfigurationManager.getInstance().getProperty("chrome.version");
     }
+
+    public String getDrag_n_DropPageURL() throws IOException {
+        return ConfigurationManager.getInstance().getProperty("drag_n_drop.page.url");
+    }
 }
 

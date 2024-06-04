@@ -1,6 +1,5 @@
 package Tests;
 
-import Helpers.RetryAnalyzer;
 import Pages.HomePage;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -33,7 +32,7 @@ public class HomePageTests extends BaseTest{
     @Severity(SeverityLevel.CRITICAL)
     @Test(description = "Тест наличия верхнего меню", priority = 1, enabled = true)
     public void headerCheckTest(){
-        Assert.assertFalse(homePage.headerCheck(), "Header not found");
+        Assert.assertTrue(homePage.headerCheck(), "Header not found");
         Assert.assertEquals(homePage.header.getText(), outputData.headerText);
     }
 
