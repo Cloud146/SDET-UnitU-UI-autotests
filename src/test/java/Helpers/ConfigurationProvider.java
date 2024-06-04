@@ -40,5 +40,9 @@ public class ConfigurationProvider {
     public String getDrag_n_DropPageURL() throws IOException {
         return ConfigurationManager.getInstance().getProperty("drag_n_drop.page.url");
     }
+
+    public String getTabsExercisesPageURL() throws IOException {
+        return ConfigurationManager.getInstance().getProperty("tabs.exercises.page.url");
+    }
 }
 
