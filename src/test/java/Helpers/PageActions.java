@@ -110,4 +110,15 @@ public class PageActions {
         );
         return isFocused != null && isFocused;
     }
+
+    /**
+     * Функция перемещения элемента c помощью DragAndDrop
+     * @param draggable - перемещаемый элемент
+     * @param droppable - элемент в область которого будет перемещён draggable элемент
+     * */
+    @Step("Скролл страницы c помощью Actions")
+    public void dragAndDrop(WebDriver driver, WebElement draggable, WebElement droppable){
+        actions = new Actions(driver);
+        actions.dragAndDrop(draggable, droppable).build().perform();
+    }
 }

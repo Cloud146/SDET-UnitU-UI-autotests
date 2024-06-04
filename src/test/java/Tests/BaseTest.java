@@ -33,7 +33,6 @@ public class BaseTest {
         return driver;
     }
 
-
     @Description("Открытие браузера с соответствующими настройками")
     @BeforeMethod(enabled = true)
     public void browserSetUp(ITestContext context) throws IOException, IllegalAccessException {
