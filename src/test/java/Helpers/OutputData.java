@@ -24,4 +24,8 @@ public class OutputData {
 
     public String errorLabelText = "Username or password is incorrect";
 
+    public String outputAlertText(String inputAlertText){
+        return "Hello " +inputAlertText +"! How are you today?";
+    }
+
 }
