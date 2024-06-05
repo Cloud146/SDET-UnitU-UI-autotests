@@ -5,7 +5,6 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -34,7 +33,6 @@ public class TabsExercisesPageTests extends BaseTest{
     public void dragAndDropTestDefault(){
         driver.switchTo().frame(tabsExercisesPage.iframeWindowsDefault);
         tabsExercisesPage.clickNewBrowserTab();
-        waitings.waitTimeForElement(100, driver, tabsExercisesPage.newBrowserTabButton);
         tabsExercisesPage.clickNewBrowserTab();
 
         Set<String> handles = driver.getWindowHandles();
@@ -42,9 +40,9 @@ public class TabsExercisesPageTests extends BaseTest{
 
         driver.switchTo().window(tabsExercisesPage.getBrowserTabByNumber(handles, iterator, 3));
 
-        Assert.assertEquals(driver.getWindowHandles().size(), 3);
-        Assert.assertEquals(driver.getCurrentUrl(), "https://way2automation.com/way2auto_jquery/frames-windows/defult1.html#");
-        Assert.assertEquals(tabsExercisesPage.newBrowserTabButton.getText(), "New Browser Tab");
-
+        softAssert.assertEquals(driver.getWindowHandles().size(), 3);
+        softAssert.assertEquals(driver.getCurrentUrl(), "https://way2automation.com/way2auto_jquery/frames-windows/defult1.html#");
+        softAssert.assertEquals(tabsExercisesPage.newBrowserTabButton.getText(), "New Browser Tab");
+        softAssert.assertAll();
     }
 }

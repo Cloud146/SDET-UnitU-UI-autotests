@@ -1,5 +1,6 @@
 package Pages;
 
+import Helpers.Waitings;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -18,6 +19,7 @@ import java.util.Set;
 public class TabsExercisesPage {
 
     private WebDriver driver;
+    Waitings waitings = new Waitings();
 
     /**
      * Объект страницы TabsExercises
@@ -46,6 +48,7 @@ public class TabsExercisesPage {
     @Step("Ввод текста в поле login")
     public void clickNewBrowserTab(){
         driver.findElement(By.xpath("//div[@class='farme_window']//a")).click();
+        waitings.waitTimeForElement(100, driver, newBrowserTabButton);
     }
 
     /**
