@@ -15,8 +15,17 @@ public class OptionsManager {
                 .addArguments("--ignore-certificate-errors")
                 .addArguments("--disable-popup-blocking")
                 .addArguments("--remote-allow-origins=**")
-                .addArguments("--disable-infobars");
-//                .addArguments("--incognito");
+                .addArguments("--disable-extensions")
+                .addArguments("--disable-notifications")
+                .addArguments("--disable-infobars")
+                .addArguments("--no-default-browser-check")
+                .addArguments("--disable-first-run-ui")
+                .addArguments("--disable-features=AutofillAssistant")
+                .addArguments("--disable-features=TranslateUI")
+                .addArguments("--disable-features=ChromeWhatsNewUI")
+                .addArguments("--disable-features=ChromeTips")
+                .addArguments("--no-first-run");
+              //  .addArguments("--incognito");
         options.setCapability("browserVersion", configurationProvider.getChromeVersion());
         options.setCapability("platformName", "Windows");
         options.setBrowserVersion(configurationProvider.getChromeVersion());

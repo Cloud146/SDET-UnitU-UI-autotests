@@ -49,5 +49,9 @@ public class ConfigurationProvider {
         return ConfigurationManager.getInstance().getProperty("alerts.exercises.page.url");
     }
 
+    public String getAuthenticationExamplePageURL() throws IOException {
+        return ConfigurationManager.getInstance().getProperty("authentication.example.page.url");
+    }
+
 }
 
