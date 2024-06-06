@@ -32,8 +32,9 @@ public class HomePageTests extends BaseTest{
     @Severity(SeverityLevel.CRITICAL)
     @Test(description = "Тест наличия верхнего меню", priority = 1, enabled = true)
     public void headerCheckTest(){
-        Assert.assertTrue(homePage.headerCheck(), "Header not found");
-        Assert.assertEquals(homePage.header.getText(), outputData.headerText);
+        softAssert.assertTrue(homePage.headerCheck(), "Header not found");
+        softAssert.assertEquals(homePage.header.getText(), outputData.headerText);
+        softAssert.assertAll();
     }
 
     @Story("Отображение нижнего меню")
@@ -42,8 +43,9 @@ public class HomePageTests extends BaseTest{
     public void footerCheckTest(){
         homePage.closePopUp()
                         .scrollToTheBottom();
-        Assert.assertTrue(homePage.footerCheck(), "Footer not found");
-        Assert.assertEquals(homePage.footer.getText(), outputData.footerText);
+        softAssert.assertTrue(homePage.footerCheck(), "Footer not found");
+        softAssert.assertEquals(homePage.footer.getText(), outputData.footerText);
+        softAssert.assertAll();
     }
 
 
@@ -54,8 +56,9 @@ public class HomePageTests extends BaseTest{
         homePage.closePopUp()
                         .scrollToTheBottom();
         waitings.waitTimeForElement(2, driver, homePage.header);
-        Assert.assertTrue(homePage.headerCheck(), "Header not found");
-        Assert.assertEquals(homePage.header.getText(), outputData.headerText);
+        softAssert.assertTrue(homePage.headerCheck(), "Header not found");
+        softAssert.assertEquals(homePage.header.getText(), outputData.headerText);
+        softAssert.assertAll();
     }
     
     @Story("Отображение блока курсов при прокрутке слайдера")

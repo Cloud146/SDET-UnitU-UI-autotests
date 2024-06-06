@@ -37,10 +37,11 @@ public class SqlExercisesPageTest extends BaseTest{
     @Test(description = "Тест авторизации пользователя и сохранения его cookie в файл", priority = 1, enabled = true)
     public void loginAndSaveCookieTest() throws IOException {
         sqlExercisesPage.authorization("loginTest1", "sqlTest1");
-        Assert.assertEquals(sqlExercisesPage.usernameCheck(), "userTest1");
+        softAssert.assertEquals(sqlExercisesPage.usernameCheck(), "userTest1");
         CookieUtils.saveCookiesToFile(driver, configurationProvider.getCookieFilePath());
         Path path = Paths.get(configurationProvider.getCookieFilePath());
-        Assert.assertTrue(Files.exists(path), "Cookie file was not saved successfully.");
+        softAssert.assertTrue(Files.exists(path), "Cookie file was not saved successfully.");
+        softAssert.assertAll();
     }
 
     @Story("Загрузка cookie авторизированного пользователя")

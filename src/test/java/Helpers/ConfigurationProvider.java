@@ -44,5 +44,10 @@ public class ConfigurationProvider {
     public String getTabsExercisesPageURL() throws IOException {
         return ConfigurationManager.getInstance().getProperty("tabs.exercises.page.url");
     }
+
+    public String getAlertsExercisesPageURL() throws IOException {
+        return ConfigurationManager.getInstance().getProperty("alerts.exercises.page.url");
+    }
+
 }
 
