@@ -4,6 +4,8 @@ import Helpers.*;
 import io.qameta.allure.Description;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestContext;
@@ -38,12 +40,12 @@ public class BaseTest {
     @Description("Открытие браузера с соответствующими настройками")
     @BeforeMethod(enabled = true)
     public void browserSetUp(ITestContext context) throws IOException, IllegalAccessException {
-        driver = DriverFactory.getWebDriver("chrome");
-        driver.manage().window().setSize(new Dimension(configurationProvider.getScreenWidth(), configurationProvider.getScreenHeight()));
+       driver = DriverFactory.getWebDriver("chrome");
+       driver.manage().window().setSize(new Dimension(configurationProvider.getScreenWidth(), configurationProvider.getScreenHeight()));
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        for(ITestNGMethod method : context.getAllTestMethods()){
-            method.setRetryAnalyzerClass(RetryAnalyzer.class);
-        }
+//        for(ITestNGMethod method : context.getAllTestMethods()){
+//            method.setRetryAnalyzerClass(RetryAnalyzer.class);
+//        }
     }
 
     @Description("СетАп для параллельного тестирования")
