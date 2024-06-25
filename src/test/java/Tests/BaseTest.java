@@ -43,9 +43,9 @@ public class BaseTest {
        driver = DriverFactory.getWebDriver("chrome");
        driver.manage().window().setSize(new Dimension(configurationProvider.getScreenWidth(), configurationProvider.getScreenHeight()));
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-//        for(ITestNGMethod method : context.getAllTestMethods()){
-//            method.setRetryAnalyzerClass(RetryAnalyzer.class);
-//        }
+        for(ITestNGMethod method : context.getAllTestMethods()){
+            method.setRetryAnalyzerClass(RetryAnalyzer.class);
+        }
     }
 
     @Description("СетАп для параллельного тестирования")
