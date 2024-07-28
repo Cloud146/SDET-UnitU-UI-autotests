@@ -1,0 +1,81 @@
+[
+  {
+    "name": "_ym_uid",
+    "value": "1717447685484442053",
+    "path": "/",
+    "domain": ".sql-ex.ru",
+    "expiry": "Jun 3, 2025, 11:48:04 PM",
+    "isSecure": true,
+    "isHttpOnly": false,
+    "sameSite": "None"
+  },
+  {
+    "name": "t3_sid_718545",
+    "value": "s1.2028241522.1717447684515.1717447685650.1.6",
+    "path": "/",
+    "domain": ".sql-ex.ru",
+    "expiry": "Jun 3, 2025, 11:48:05 PM",
+    "isSecure": false,
+    "isHttpOnly": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "_ym_isad",
+    "value": "2",
+    "path": "/",
+    "domain": ".sql-ex.ru",
+    "expiry": "Jun 4, 2024, 7:48:04 PM",
+    "isSecure": true,
+    "isHttpOnly": false,
+    "sameSite": "None"
+  },
+  {
+    "name": "top100_id",
+    "value": "t1.718545.2139637455.1717447684514",
+    "path": "/",
+    "domain": ".sql-ex.ru",
+    "expiry": "Jun 3, 2025, 11:48:05 PM",
+    "isSecure": false,
+    "isHttpOnly": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "adtech_uid",
+    "value": "e42a4d1f-e8a6-4d62-bd94-8d5b5a5449d1%3Asql-ex.ru",
+    "path": "/",
+    "domain": ".sql-ex.ru",
+    "expiry": "Jun 3, 2025, 11:48:05 PM",
+    "isSecure": true,
+    "isHttpOnly": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "PHPSESSID",
+    "value": "vhn6ca8ruri9et53flske4qrd2",
+    "path": "/",
+    "domain": "www.sql-ex.ru",
+    "isSecure": false,
+    "isHttpOnly": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "_ym_d",
+    "value": "1717447685",
+    "path": "/",
+    "domain": ".sql-ex.ru",
+    "expiry": "Jun 3, 2025, 11:48:04 PM",
+    "isSecure": true,
+    "isHttpOnly": false,
+    "sameSite": "None"
+  },
+  {
+    "name": "_ym_visorc",
+    "value": "w",
+    "path": "/",
+    "domain": ".sql-ex.ru",
+    "expiry": "Jun 4, 2024, 12:18:05 AM",
+    "isSecure": true,
+    "isHttpOnly": false,
+    "sameSite": "None"
+  }
+]
