@@ -1,6 +1,8 @@
 # Используем образ Maven с Java 21
 FROM maven:3.9.5-eclipse-temurin-21
 
+RUN mkdir -p /root/.m2/repository && chown -R root:root /root/.m2
+
 # Устанавливаем необходимые зависимости
 RUN apt-get update && apt-get install -y \
     curl \
