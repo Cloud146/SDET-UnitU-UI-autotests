@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/Cloud146/SDET-UnitU-UI-autotests.git'
+                git branch: 'main', url: 'https://github.com/Cloud146/SDET-UnitU-UI-autotests.git'
             }
         }
         stage('Build and Run Containers') {
@@ -33,7 +33,15 @@ pipeline {
     post {
         always {
             archiveArtifacts artifacts: 'target/allure-report/**'
-            publishHTML([reportName: 'Allure Report', reportDir: 'target/allure-report'])
+            script {
+            publishHTML([allowMissing: false,
+                alwaysLinkToLastBuild: false,
+                keepAll: true,
+                reportDir: 'target/allure-report',
+                reportFiles: 'index.html',
+                reportName: 'Allure Report'
+            ])
+        }
         }
     }
 }
