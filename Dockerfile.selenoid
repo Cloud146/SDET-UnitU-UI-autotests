@@ -1,6 +1,9 @@
 # Используем базовый образ для Selenoid
 FROM aerokube/selenoid:latest-release
 
+# Устанавливаем необходимые зависимости
+RUN apt-get update && apt-get install -y curl
+
 # Создаем директорию для конфигурации
 RUN mkdir -p /etc/selenoid/
 
@@ -9,3 +12,6 @@ COPY browsers.json /etc/selenoid/browsers.json
 
 # Команда для запуска Selenoid
 CMD ["-conf", "/etc/selenoid/browsers.json"]
+
+# Команда для запуска Selenoid
+ENTRYPOINT ["/usr/bin/selenoid", "-conf", "/etc/selenoid/browsers.json"]
