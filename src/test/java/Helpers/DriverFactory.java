@@ -90,8 +90,6 @@ public class DriverFactory extends  OptionsManager{
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--no-sandbox");
-        options.addArguments("--headless");  // если вы используете безголовый режим
-        options.addArguments("--disable-gpu");  // если используется GPU
 
         // Set up capabilities
         DesiredCapabilities capabilities = new DesiredCapabilities();
