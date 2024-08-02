@@ -40,8 +40,9 @@ public class BaseTest {
     @Description("Открытие браузера с соответствующими настройками")
     @BeforeMethod(enabled = true)
     public void browserSetUp(ITestContext context) throws IOException, IllegalAccessException {
-       driver = DriverFactory.getDriver("chrome");
-       driver.manage().window().setSize(new Dimension(configurationProvider.getScreenWidth(), configurationProvider.getScreenHeight()));
+       //driver = DriverFactory.getWebDriver("chrome");
+        driver = DriverFactory.getChromeDriver();
+        driver.manage().window().setSize(new Dimension(configurationProvider.getScreenWidth(), configurationProvider.getScreenHeight()));
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         for(ITestNGMethod method : context.getAllTestMethods()){
             method.setRetryAnalyzerClass(RetryAnalyzer.class);

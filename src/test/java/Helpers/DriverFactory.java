@@ -2,6 +2,7 @@ package Helpers;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -85,4 +86,17 @@ public class DriverFactory extends  OptionsManager{
         return new RemoteWebDriver(new URL(gridUrl), capabilities);
     }
 
+    public static ChromeDriver getChromeDriver() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--headless");  // если вы используете безголовый режим
+        options.addArguments("--disable-gpu");  // если используется GPU
+
+        // Set up capabilities
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("enableVNC", true);
+        options.merge(capabilities);
+        return new ChromeDriver(options);
+    }
 }
