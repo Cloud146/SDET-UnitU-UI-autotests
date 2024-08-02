@@ -13,8 +13,21 @@ services:
     command: tail -f /dev/null  # Держим контейнер активным
 
   selenoid:
-    build:
-      context: .
-      dockerfile: Dockerfile.selenoid
+    image: aerokube/selenoid:latest-release
+    network_mode: bridge
     ports:
       - "4444:4444"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /path/to/selenoid/config:/etc/selenoid:ro
+  selenoid-ui:
+    image: aerokube/selenoid-ui
+    network_mode: bridge
+    links:
+      - selenoid
+    ports:
+      - "8080:8080"
+    environment:
+      - SELENOID_URI=http://selenoid:4444
+    volumes:
+      - /path/to/selenoid-ui/config:/etc/selenoid-ui:ro
