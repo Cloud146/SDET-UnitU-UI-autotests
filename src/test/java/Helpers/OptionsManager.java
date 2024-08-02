@@ -2,6 +2,7 @@ package Helpers;
 
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.ie.InternetExplorerOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.IOException;
 
@@ -31,6 +32,10 @@ public class OptionsManager {
         options.setCapability("browserVersion", configurationProvider.getChromeVersion());
         options.setCapability("platformName", "Windows");
         options.setBrowserVersion(configurationProvider.getChromeVersion());
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("enableVNC", true);
+        options.merge(capabilities);
         return options;
     }
 

@@ -37,12 +37,37 @@ public class DriverFactory extends  OptionsManager{
         return driver;
     }
 
-    public static WebDriver getDriver(String browser, String gridUrl) throws MalformedURLException {
+    public static WebDriver getDriver(String browser) throws IOException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
         switch (browser.toLowerCase()) {
             case "chrome":
                 capabilities.setBrowserName("chrome");
+                capabilities.merge(OptionsManager.getChromeOptions());
+                break;
+            case "firefox":
+                capabilities.setBrowserName("firefox");
+                break;
+            case "edge":
+                capabilities.setBrowserName("MicrosoftEdge");
+                break;
+            case "ie":
+                capabilities.setBrowserName("internet explorer");
+                capabilities.setCapability("ignoreProtectedModeSettings", true);
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid browser: " + browser);
+        }
+        return new RemoteWebDriver(capabilities);
+    }
+
+    public static WebDriver getDriver(String browser, String gridUrl) throws IOException {
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+
+        switch (browser.toLowerCase()) {
+            case "chrome":
+                capabilities.setBrowserName("chrome");
+                capabilities.merge(OptionsManager.getChromeOptions());
                 break;
             case "firefox":
                 capabilities.setBrowserName("firefox");
