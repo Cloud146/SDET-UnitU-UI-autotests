@@ -91,7 +91,6 @@ public class DriverFactory extends  OptionsManager{
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--no-sandbox");
 
-        // Set up capabilities
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("enableVNC", true);
         options.merge(capabilities);
