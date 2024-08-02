@@ -24,7 +24,8 @@ public class OptionsManager {
                 .addArguments("--disable-features=TranslateUI")
                 .addArguments("--disable-features=ChromeWhatsNewUI")
                 .addArguments("--disable-features=ChromeTips")
-                .addArguments("--no-first-run");
+                .addArguments("--no-first-run")
+                .addArguments("--disable-dev-shm-usage");
               //  .addArguments("--incognito");
         options.setCapability("browserVersion", configurationProvider.getChromeVersion());
         options.setCapability("platformName", "Windows");
