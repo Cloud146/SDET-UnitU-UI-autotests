@@ -1,20 +1,20 @@
 [
   {
     "name": "_ym_uid",
-    "value": "1717447685484442053",
+    "value": "1722369199960541225",
     "path": "/",
     "domain": ".sql-ex.ru",
-    "expiry": "Jun 3, 2025, 11:48:04 PM",
+    "expiry": "Jul 30, 2025, 10:53:18 PM",
     "isSecure": true,
     "isHttpOnly": false,
     "sameSite": "None"
   },
   {
     "name": "t3_sid_718545",
-    "value": "s1.2028241522.1717447684515.1717447685650.1.6",
+    "value": "s1.1591285044.1722369198687.1722369200033.1.6",
     "path": "/",
     "domain": ".sql-ex.ru",
-    "expiry": "Jun 3, 2025, 11:48:05 PM",
+    "expiry": "Jul 30, 2025, 10:53:20 PM",
     "isSecure": false,
     "isHttpOnly": false,
     "sameSite": "Lax"
@@ -24,34 +24,34 @@
     "value": "2",
     "path": "/",
     "domain": ".sql-ex.ru",
-    "expiry": "Jun 4, 2024, 7:48:04 PM",
+    "expiry": "Jul 31, 2024, 6:53:18 PM",
     "isSecure": true,
     "isHttpOnly": false,
     "sameSite": "None"
   },
   {
     "name": "top100_id",
-    "value": "t1.718545.2139637455.1717447684514",
+    "value": "t1.718545.1598364876.1722369198686",
     "path": "/",
     "domain": ".sql-ex.ru",
-    "expiry": "Jun 3, 2025, 11:48:05 PM",
+    "expiry": "Jul 30, 2025, 10:53:20 PM",
     "isSecure": false,
     "isHttpOnly": false,
     "sameSite": "Lax"
   },
   {
     "name": "adtech_uid",
-    "value": "e42a4d1f-e8a6-4d62-bd94-8d5b5a5449d1%3Asql-ex.ru",
+    "value": "4684fc07-0e91-4391-9c56-ccca445a2228%3Asql-ex.ru",
     "path": "/",
     "domain": ".sql-ex.ru",
-    "expiry": "Jun 3, 2025, 11:48:05 PM",
+    "expiry": "Jul 30, 2025, 10:53:20 PM",
     "isSecure": true,
     "isHttpOnly": false,
     "sameSite": "Lax"
   },
   {
     "name": "PHPSESSID",
-    "value": "vhn6ca8ruri9et53flske4qrd2",
+    "value": "ilhmin0ebbstp72ok7jcq2po6r",
     "path": "/",
     "domain": "www.sql-ex.ru",
     "isSecure": false,
@@ -60,10 +60,10 @@
   },
   {
     "name": "_ym_d",
-    "value": "1717447685",
+    "value": "1722369199",
     "path": "/",
     "domain": ".sql-ex.ru",
-    "expiry": "Jun 3, 2025, 11:48:04 PM",
+    "expiry": "Jul 30, 2025, 10:53:18 PM",
     "isSecure": true,
     "isHttpOnly": false,
     "sameSite": "None"
@@ -73,7 +73,7 @@
     "value": "w",
     "path": "/",
     "domain": ".sql-ex.ru",
-    "expiry": "Jun 4, 2024, 12:18:05 AM",
+    "expiry": "Jul 30, 2024, 11:23:20 PM",
     "isSecure": true,
     "isHttpOnly": false,
     "sameSite": "None"

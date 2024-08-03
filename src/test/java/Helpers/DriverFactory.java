@@ -38,30 +38,6 @@ public class DriverFactory extends  OptionsManager{
         return driver;
     }
 
-    public static WebDriver getDriver(String browser) throws IOException {
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-
-        switch (browser.toLowerCase()) {
-            case "chrome":
-                capabilities.setBrowserName("chrome");
-                capabilities.merge(OptionsManager.getChromeOptions());
-                break;
-            case "firefox":
-                capabilities.setBrowserName("firefox");
-                break;
-            case "edge":
-                capabilities.setBrowserName("MicrosoftEdge");
-                break;
-            case "ie":
-                capabilities.setBrowserName("internet explorer");
-                capabilities.setCapability("ignoreProtectedModeSettings", true);
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid browser: " + browser);
-        }
-        return new RemoteWebDriver(capabilities);
-    }
-
     public static WebDriver getDriver(String browser, String gridUrl) throws IOException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
@@ -84,16 +60,5 @@ public class DriverFactory extends  OptionsManager{
                 throw new IllegalArgumentException("Invalid browser: " + browser);
         }
         return new RemoteWebDriver(new URL(gridUrl), capabilities);
-    }
-
-    public static ChromeDriver getChromeDriver() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--no-sandbox");
-
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("enableVNC", true);
-        options.merge(capabilities);
-        return new ChromeDriver(options);
     }
 }
