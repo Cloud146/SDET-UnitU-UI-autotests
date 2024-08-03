@@ -2,8 +2,6 @@ package Helpers;
 
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.ie.InternetExplorerOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
-
 import java.io.IOException;
 
 public class OptionsManager {
