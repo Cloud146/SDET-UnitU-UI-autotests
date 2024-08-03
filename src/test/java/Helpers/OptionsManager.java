@@ -30,10 +30,6 @@ public class OptionsManager {
         options.setCapability("browserVersion", configurationProvider.getChromeVersion());
         options.setCapability("platformName", "Windows");
         options.setBrowserVersion(configurationProvider.getChromeVersion());
-
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("enableVNC", true);
-        options.merge(capabilities);
         return options;
     }
 
