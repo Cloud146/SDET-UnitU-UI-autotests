@@ -1,6 +1,6 @@
 pipeline {
     agent any
-	
+
     environment {
         MAVEN_OPTS = '-Dmaven.repo.local=/home/app/.m2/repository'
     }
@@ -14,37 +14,37 @@ pipeline {
         stage('Build and Run Containers') {
             steps {
                 script {
-                    sh 'docker-compose down'
-                    sh 'docker-compose up --build -d'
+                    powershell 'docker-compose down'
+                    powershell 'docker-compose up --build -d'
                 }
             }
         }
         stage('Run Tests') {
             steps {
                 script {
-                    sh 'docker-compose exec test-runner mvn clean test'
+                    powershell 'docker-compose exec test-runner mvn clean test'
                 }
             }
         }
         stage('Generate Allure Report') {
             steps {
                 script {
-                    sh 'docker-compose exec test-runner allure generate /app/target/allure-results -o /app/target/allure-report'
+                    powershell 'docker-compose exec test-runner allure generate /app/allure-results -o /app/allure-report'
                 }
             }
         }
     }
     post {
         always {
-            archiveArtifacts artifacts: 'target/allure-report/**'
+            archiveArtifacts artifacts: 'allure-report/**'
             publishHTML([allowMissing: false,
                 alwaysLinkToLastBuild: false,
                 keepAll: true,
-                reportDir: 'target/allure-report',
+                reportDir: 'allure-report',
                 reportFiles: 'index.html',
                 reportName: 'Allure Report'
             ])
-            sh 'docker-compose down -v'
+            powershell 'docker-compose down -v'
         }
     }
 }
