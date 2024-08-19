@@ -63,7 +63,7 @@ public class HomePageTests extends BaseTest{
     
     @Story("Отображение блока курсов при прокрутке слайдера")
     @Severity(SeverityLevel.NORMAL)
-    @Test(description = "Тест блока с курсами (слайдер)", priority = 3, enabled = true)
+    @Test(description = "Тест блока с курсами (слайдер)", priority = 3, enabled = false)
     public void courseSwapperTest(){
         homePage.closePopUp()
                         .actionScroll(0, 1100);

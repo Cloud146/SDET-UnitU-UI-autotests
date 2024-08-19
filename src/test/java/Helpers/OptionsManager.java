@@ -1,5 +1,7 @@
 package Helpers;
 
+import org.checkerframework.checker.units.qual.C;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -37,6 +39,19 @@ public class OptionsManager {
         capabilities.setCapability("enableVNC", true);
         options.merge(capabilities);
         return options;
+    }
+
+    public static ChromeDriver getChromeDriver(){
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--no-sandbox");
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("enableVNC", true);
+        capabilities.setCapability("enableVideo", false);
+        capabilities.setVersion("114.0");
+        options.merge(capabilities);
+        return new ChromeDriver(options);
     }
 
     public static InternetExplorerOptions getIEOptions(){

@@ -18,6 +18,23 @@
         <allure-testng.version>2.27.0</allure-testng.version>
     </properties>
 
+
+    <profiles>
+        <profile>
+            <id>env_docker_selenoid</id>
+            <activation>
+                <property>
+                    <name>env.MAVEN_IN_DOCKER</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <properties>
+                <config.location.env>configuration/env_docker_selenoid.xml</config.location.env>
+            </properties>
+        </profile>
+    </profiles>
+
+
     <dependencies>
         <dependency>
             <groupId>org.apache.maven.plugins</groupId>
@@ -40,6 +57,16 @@
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>4.21.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-remote-driver</artifactId>
+            <version>4.23.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <version>7.4.1</version>
         </dependency>
         <dependency>
             <groupId>io.qameta.allure</groupId>
