@@ -25,32 +25,14 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
-                    powershell 'docker-compose logs test'
-                    // Запуск тестов
-                    powershell 'docker-compose exec test mvn clean -DskipTests && mvn test -P env_docker_selenoid'
-                }
-            }
-        }
-        stage('Generate Allure Report') { 
-            steps {
-                script {
-                    // Генерация Allure отчета в корень проекта
-                    powershell 'docker-compose exec test allure generate /project/allure-results -o /project/allure-report'
+                    powershell 'docker-compose exec test sh -c "rm -rf /project/target"'
+                    powershell 'docker-compose exec test mvn clean test'
                 }
             }
         }
     }
     post {
         always {
-            // Архивация артефактов Allure из корневого каталога
-            archiveArtifacts artifacts: 'allure-report/**'
-            publishHTML([allowMissing: false,
-                alwaysLinkToLastBuild: false,
-                keepAll: true,
-                reportDir: 'allure-report',
-                reportFiles: 'index.html',
-                reportName: 'Allure Report'
-            ])
             powershell 'docker-compose down -v'
         }
     }
