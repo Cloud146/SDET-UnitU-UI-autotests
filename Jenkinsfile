@@ -16,6 +16,10 @@ pipeline {
                 script {
                     powershell 'docker-compose down'
                     powershell 'docker-compose up --build -d'
+					// Проверка статуса и логов контейнеров
+                    powershell 'docker-compose ps'
+                    powershell 'docker-compose logs selenoid'
+                    powershell 'docker-compose logs selenoid-ui'
                 }
             }
         }
