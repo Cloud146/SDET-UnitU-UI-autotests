@@ -35,18 +35,18 @@ pipeline {
         stage('Generate Allure Report') {
             steps {
                 script {
-                    powershell 'docker-compose exec test allure generate /project/allure-results -o /project/allure-report'
+                    powershell 'docker-compose exec test allure generate /project/target/allure-results -o /project/target/allure-report'
                 }
             }
         }
     }
     post {
         always {
-            archiveArtifacts artifacts: 'allure-report/**'
+            archiveArtifacts artifacts: 'target/allure-report/**'
             publishHTML([allowMissing: false,
                 alwaysLinkToLastBuild: false,
                 keepAll: true,
-                reportDir: 'allure-report',
+                reportDir: 'target/allure-report',
                 reportFiles: 'index.html',
                 reportName: 'Allure Report'
             ])
