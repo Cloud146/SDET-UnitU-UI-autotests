@@ -66,14 +66,15 @@ public class BaseTest {
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-dev-shm-usage");
+
         options.addArguments("--no-sandbox");
         //options.addArguments("--remote-debugging-port=9222");
         options.merge(capabilities);
 
         //String remoteUrl = "http://localhost:4444/wd/hub"; //Could not start a new session. Possible causes are invalid address of the remote server or browser start-up failure
         //String remoteUrl = "http://host.docker.internal:8000"; //Could not start a new session. Possible causes are invalid address of the remote server or browser start-up failure
-        //String remoteUrl = "http://host.docker.internal:4444/wd/hub"; //Could not start a new session. Response code 500. Message: create container: Error response from daemon: No such image: selenoid/chrome:latest
-        String remoteUrl = "http://selenoid:4444/wd/hub"; //Could not start a new session. Response code 500. Message: create container: Error response from daemon: No such image: selenoid/chrome:late
+        String remoteUrl = "http://host.docker.internal:4444/wd/hub"; //Could not start a new session. Response code 500. Message: create container: Error response from daemon: No such image: selenoid/chrome:latest
+        //String remoteUrl = "http://selenoid:4444/wd/hub"; //Could not start a new session. Response code 500. Message: create container: Error response from daemon: No such image: selenoid/chrome:late
         driver = new RemoteWebDriver(new URL(remoteUrl), options);
     }
 
