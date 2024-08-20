@@ -1,7 +1,7 @@
 pipeline {
     agent any
-	
-	environment {
+
+    environment {
         MAVEN_OPTS = '-Dmaven.repo.local=/home/app/.m2/repository'
     }
 
