@@ -11,7 +11,7 @@ pipeline {
             steps {
                 script {
                     powershell 'docker-compose down'
-                    powershell 'docker-compose up --build -d'
+                    powershell 'docker-compose up --build'
 					// Проверка статуса и логов контейнеров
                     powershell 'docker-compose ps'
                     powershell 'docker-compose logs selenoid'
