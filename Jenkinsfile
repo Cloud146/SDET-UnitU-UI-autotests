@@ -14,13 +14,9 @@ pipeline {
         stage('Build and Run Containers') {
             steps {
                 script {
-                    // Остановка и удаление всех контейнеров перед запуском
                     powershell 'docker-compose down'
-                    // Сборка и запуск контейнеров
                     powershell 'docker-compose up --build -d'
-                    // Проверка статуса контейнеров
                     powershell 'docker-compose ps'
-                    // Логи контейнеров для отладки
                     powershell 'docker-compose logs selenoid'
                     powershell 'docker-compose logs selenoid-ui'
                 }
@@ -29,17 +25,32 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
-                    // Логи тестового контейнера перед запуском тестов
                     powershell 'docker-compose logs test'
                     // Запуск тестов
-                    powershell 'docker-compose exec test mvn clean test'
+                    powershell 'docker-compose exec test mvn clean test -P env_docker_selenoid'
+                }
+            }
+        }
+        stage('Generate Allure Report') { 
+            steps {
+                script {
+                    // Генерация Allure отчета в корень проекта
+                    powershell 'docker-compose exec test allure generate /project/allure-results -o /project/allure-report'
                 }
             }
         }
     }
     post {
         always {
-            // Завершение работы и удаление всех контейнеров
+            // Архивация артефактов Allure из корневого каталога
+            archiveArtifacts artifacts: 'allure-report/**'
+            publishHTML([allowMissing: false,
+                alwaysLinkToLastBuild: false,
+                keepAll: true,
+                reportDir: 'allure-report',
+                reportFiles: 'index.html',
+                reportName: 'Allure Report'
+            ])
             powershell 'docker-compose down -v'
         }
     }
