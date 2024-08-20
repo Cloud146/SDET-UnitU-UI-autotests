@@ -14,10 +14,13 @@ pipeline {
         stage('Build and Run Containers') {
             steps {
                 script {
+                    // Остановка и удаление всех контейнеров перед запуском
                     powershell 'docker-compose down'
+                    // Сборка и запуск контейнеров
                     powershell 'docker-compose up --build -d'
-					// Проверка статуса и логов контейнеров
+                    // Проверка статуса контейнеров
                     powershell 'docker-compose ps'
+                    // Логи контейнеров для отладки
                     powershell 'docker-compose logs selenoid'
                     powershell 'docker-compose logs selenoid-ui'
                 }
@@ -26,30 +29,17 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
-                    // Добавляем логи перед запуском тестов
+                    // Логи тестового контейнера перед запуском тестов
                     powershell 'docker-compose logs test'
+                    // Запуск тестов
                     powershell 'docker-compose exec test mvn clean test'
-                }
-            }
-        }
-        stage('Generate Allure Report') {
-            steps {
-                script {
-                    powershell 'docker-compose exec test allure generate /project/target/allure-results -o /project/target/allure-report'
                 }
             }
         }
     }
     post {
         always {
-            archiveArtifacts artifacts: 'target/allure-report/**'
-            publishHTML([allowMissing: false,
-                alwaysLinkToLastBuild: false,
-                keepAll: true,
-                reportDir: 'target/allure-report',
-                reportFiles: 'index.html',
-                reportName: 'Allure Report'
-            ])
+            // Завершение работы и удаление всех контейнеров
             powershell 'docker-compose down -v'
         }
     }
