@@ -1,5 +1,9 @@
 pipeline {
     agent any
+	
+	environment {
+        MAVEN_OPTS = '-Dmaven.repo.local=/home/app/.m2/repository'
+    }
 
     stages {
         stage('Checkout') {
@@ -24,6 +28,7 @@ pipeline {
                 script {
                     // Добавляем логи перед запуском тестов
                     powershell 'docker-compose logs test'
+					powershell 'docker-compose exec test rm -rf /project/target'
                     powershell 'docker-compose exec test mvn clean test'
                 }
             }
