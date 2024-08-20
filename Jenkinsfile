@@ -9,48 +9,40 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'CI+Docker', url: 'https://github.com/Cloud146/SDET-UnitU-UI-autotests.git'
+                git 'git branch: 'CI+Docker', url: 'https://github.com/Cloud146/SDET-UnitU-UI-autotests.git'
             }
         }
 
         stage('Build Docker Images') {
             steps {
-                script {
-                    bat """
-                    docker-compose -f ${DOCKER_COMPOSE_FILE} up -d
-                    """
-                }
+                powershell """
+                & docker-compose -f ${env:DOCKER_COMPOSE_FILE} up -d
+                """
             }
         }
 
         stage('Run Tests') {
             steps {
-                script {
-                    bat """
-                    docker-compose -f ${DOCKER_COMPOSE_FILE} run --rm test
-                    """
-                }
+                powershell """
+                & docker-compose -f ${env:DOCKER_COMPOSE_FILE} run --rm test
+                """
             }
         }
 
         stage('Cleanup') {
             steps {
-                script {
-                    bat """
-                    docker-compose -f ${DOCKER_COMPOSE_FILE} down
-                    """
-                }
+                powershell """
+                & docker-compose -f ${env:DOCKER_COMPOSE_FILE} down
+                """
             }
         }
     }
 
     post {
         always {
-            script {
-                bat """
-                docker-compose -f ${DOCKER_COMPOSE_FILE} down
-                """
-            }
+            powershell """
+            & docker-compose -f ${env:DOCKER_COMPOSE_FILE} down
+            """
         }
     }
 }
