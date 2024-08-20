@@ -14,13 +14,17 @@ pipeline {
         stage('Build and Run Containers') {
             steps {
                 script {
-                    // Остановка и удаление всех контейнеров перед запуском
+                    // Логи до выполнения команд
+                    echo "Stopping existing containers..."
                     powershell 'docker-compose down'
-                    // Сборка и запуск контейнеров
+                    
+                    echo "Starting containers..."
                     powershell 'docker-compose up --build -d'
-                    // Проверка статуса контейнеров
+                    
+                    echo "Checking container status..."
                     powershell 'docker-compose ps'
-                    // Логи контейнеров для отладки
+                    
+                    echo "Fetching container logs..."
                     powershell 'docker-compose logs selenoid'
                     powershell 'docker-compose logs selenoid-ui'
                 }
@@ -29,9 +33,10 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
-                    // Логи тестового контейнера перед запуском тестов
+                    echo "Fetching logs from test container before running tests..."
                     powershell 'docker-compose logs test'
-                    // Запуск тестов
+                    
+                    echo "Running tests..."
                     powershell 'docker-compose exec test mvn clean test'
                 }
             }
@@ -39,7 +44,7 @@ pipeline {
     }
     post {
         always {
-            // Завершение работы и удаление всех контейнеров
+            echo "Cleaning up containers..."
             powershell 'docker-compose down -v'
         }
     }
