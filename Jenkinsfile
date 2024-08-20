@@ -22,14 +22,16 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
-                    powershell 'docker-compose exec test-runner mvn clean test'
+                    // Добавляем логи перед запуском тестов
+                    powershell 'docker-compose logs test'
+                    powershell 'docker-compose exec test mvn clean test -P env_docker_selenoid'
                 }
             }
         }
         stage('Generate Allure Report') {
             steps {
                 script {
-                    powershell 'docker-compose exec test-runner allure generate /app/allure-results -o /app/allure-report'
+                    powershell 'docker-compose exec test allure generate /project/allure-results -o /project/allure-report'
                 }
             }
         }
