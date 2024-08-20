@@ -66,7 +66,6 @@ public class BaseTest {
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-dev-shm-usage");
-
         options.addArguments("--no-sandbox");
         //options.addArguments("--remote-debugging-port=9222");
         options.merge(capabilities);
