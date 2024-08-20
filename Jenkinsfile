@@ -2,54 +2,55 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_COMPOSE_FILE = 'docker-compose.yml'
-        COMPOSE_PROJECT_NAME = 'selenium_tests'
+        MAVEN_OPTS = '-Dmaven.repo.local=/home/app/.m2/repository'
     }
 
     stages {
         stage('Checkout') {
             steps {
-                script {
-                    // Клонируем репозиторий
-                    git branch: 'CI+Docker', url: 'https://github.com/Cloud146/SDET-UnitU-UI-autotests.git'
-                }
+                git branch: 'CI+Docker', url: 'https://github.com/Cloud146/SDET-UnitU-UI-autotests.git'
             }
         }
-
-        stage('Set Up Docker Compose') {
+        stage('Build and Run Containers') {
             steps {
                 script {
-                    // Запускаем Docker Compose
-                    bat 'docker-compose -f %DOCKER_COMPOSE_FILE% up -d'
+                    powershell 'docker-compose down'
+                    powershell 'docker-compose up --build -d'
+					// Проверка статуса и логов контейнеров
+                    powershell 'docker-compose ps'
+                    powershell 'docker-compose logs selenoid'
+                    powershell 'docker-compose logs selenoid-ui'
                 }
             }
         }
-
         stage('Run Tests') {
             steps {
                 script {
-                    // Выполняем Maven тесты
-                    bat 'docker-compose -f %DOCKER_COMPOSE_FILE% run --rm test'
+                    // Добавляем логи перед запуском тестов
+                    powershell 'docker-compose logs test'
+                    powershell 'docker-compose exec test mvn clean test'
                 }
             }
         }
-
-        stage('Tear Down') {
+        stage('Generate Allure Report') {
             steps {
                 script {
-                    // Останавливаем и удаляем контейнеры
-                    bat 'docker-compose -f %DOCKER_COMPOSE_FILE% down'
+                    powershell 'docker-compose exec test allure generate /project/allure-results -o /project/allure-report'
                 }
             }
         }
     }
-
     post {
         always {
-            // В любом случае, по окончании работы мы можем остановить контейнеры
-            script {
-                bat 'docker-compose -f %DOCKER_COMPOSE_FILE% down'
-            }
+            archiveArtifacts artifacts: 'allure-report/**'
+            publishHTML([allowMissing: false,
+                alwaysLinkToLastBuild: false,
+                keepAll: true,
+                reportDir: 'allure-report',
+                reportFiles: 'index.html',
+                reportName: 'Allure Report'
+            ])
+            powershell 'docker-compose down -v'
         }
     }
 }
