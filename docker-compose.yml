@@ -1,3 +1,4 @@
+version: '3'
 services:
   selenoid:
     image: aerokube/selenoid:latest-release
@@ -23,8 +24,6 @@ services:
       - ".:/project"
       - "./m2:/root/.m2"
     working_dir: /project
-    entrypoint: ["sh", "-c", "mvn clean test -P env_docker_selenoid; tail -f /dev/null"]
+    command: mvn clean test -P env_docker_selenoid
     links:
       - selenoid
-    stdin_open: true
-    tty: true

@@ -24,7 +24,7 @@ pipeline {
                 script {
                     // Добавляем логи перед запуском тестов
                     powershell 'docker-compose logs test'
-                    powershell 'docker-compose exec test mvn clean test -P env_docker_selenoid'
+                    powershell 'docker-compose exec test mvn clean test'
                 }
             }
         }
