@@ -3,46 +3,53 @@ pipeline {
 
     environment {
         DOCKER_COMPOSE_FILE = 'docker-compose.yml'
-        DOCKER_COMPOSE_COMMAND = 'docker-compose'
+        COMPOSE_PROJECT_NAME = 'selenium_tests'
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git 'git branch: 'CI+Docker', url: 'https://github.com/Cloud146/SDET-UnitU-UI-autotests.git'
+                script {
+                    // Клонируем репозиторий
+                    git branch: 'CI+Docker', url: 'https://github.com/Cloud146/SDET-UnitU-UI-autotests.git'
+                }
             }
         }
 
-        stage('Build Docker Images') {
+        stage('Set Up Docker Compose') {
             steps {
-                powershell """
-                & docker-compose -f ${env:DOCKER_COMPOSE_FILE} up -d
-                """
+                script {
+                    // Запускаем Docker Compose
+                    bat 'docker-compose -f %DOCKER_COMPOSE_FILE% up -d'
+                }
             }
         }
 
         stage('Run Tests') {
             steps {
-                powershell """
-                & docker-compose -f ${env:DOCKER_COMPOSE_FILE} run --rm test
-                """
+                script {
+                    // Выполняем Maven тесты
+                    bat 'docker-compose -f %DOCKER_COMPOSE_FILE% run --rm test'
+                }
             }
         }
 
-        stage('Cleanup') {
+        stage('Tear Down') {
             steps {
-                powershell """
-                & docker-compose -f ${env:DOCKER_COMPOSE_FILE} down
-                """
+                script {
+                    // Останавливаем и удаляем контейнеры
+                    bat 'docker-compose -f %DOCKER_COMPOSE_FILE% down'
+                }
             }
         }
     }
 
     post {
         always {
-            powershell """
-            & docker-compose -f ${env:DOCKER_COMPOSE_FILE} down
-            """
+            // В любом случае, по окончании работы мы можем остановить контейнеры
+            script {
+                bat 'docker-compose -f %DOCKER_COMPOSE_FILE% down'
+            }
         }
     }
 }
