@@ -29,7 +29,7 @@ pipeline {
                     // Добавляем логи перед запуском тестов
                     powershell 'docker-compose logs test'
 					//powershell 'docker-compose exec test rm -rf /project/target'
-                    powershell 'docker-compose exec test mvn test'
+                    powershell 'docker-compose exec test mvn clean test'
                 }
             }
         }
