@@ -20,6 +20,7 @@ pipeline {
                 }
             }
         }
+	}
         stage('Build and Run Containers') {
             steps {
                 script {
