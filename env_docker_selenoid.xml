@@ -4,7 +4,7 @@
     <entry key="webUrl">http://host.docker.internal:8000</entry>
     <entry key="browserName">chrome</entry>
     <entry key="remote">true</entry>
-    <entry key="seleniumUrl">http://host.docker.internal:4444/wd/hub</entry>
+    <entry key="seleniumUrl">http://selenoid:4444/wd/hub</entry>
 	<entry key="browserVersion">127.0</entry>
     <entry key="pageLoadTimeout">25</entry>
     <entry key="explicitTimeout">15</entry>

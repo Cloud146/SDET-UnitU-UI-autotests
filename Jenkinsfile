@@ -11,32 +11,37 @@ pipeline {
                 git branch: 'CI+Docker', url: 'https://github.com/Cloud146/SDET-UnitU-UI-autotests.git'
             }
         }
+		
+		stage('Pull browser') {
+        steps {
+            catchError {
+                script {
+      	    sh "docker pull selenoid/vnc:chrome_127.0"
+                }
+            }
+        }
         stage('Build and Run Containers') {
             steps {
                 script {
-                    powershell 'docker-compose down'
-                    powershell 'docker-compose up --build'
-					// Проверка статуса и логов контейнеров
-                    powershell 'docker-compose ps'
-                    powershell 'docker-compose logs selenoid'
-                    powershell 'docker-compose logs selenoid-ui'
+					step([$class: 'DockerComposeBuilder', dockerComposeFile: 'docker-compose.yml', option: [$class: 'StartService', scale: 1, service: 'selenoid'], useCustomDockerComposeFile: false])
+                    sh 'docker-compose ps'
+                    sh 'docker-compose logs selenoid'
+                    sh 'docker-compose logs selenoid-ui'
                 }
             }
         }
         stage('Run Tests') {
             steps {
                 script {
-                    // Добавляем логи перед запуском тестов
-                    powershell 'docker-compose logs test'
-					//powershell 'docker-compose exec test rm -rf /project/target'
-                    powershell 'docker-compose exec test mvn clean test'
+                    sh 'docker-compose logs test'
+                    sh "docker-compose -f /var/jenkins_home/workspace/est/estimate_probation/docker-compose.yml up test"
                 }
             }
         }
         stage('Generate Allure Report') {
             steps {
                 script {
-                    powershell 'docker-compose exec test allure generate /project/target/allure-results -o /project/target/allure-report'
+                    sh 'docker-compose exec test allure generate /project/target/allure-results -o /project/target/allure-report'
                 }
             }
         }
