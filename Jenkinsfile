@@ -43,11 +43,14 @@ pipeline {
         stage('Generate Allure Report') {
             steps {
                 script {
-					//powershell 'allure generate target/allure-results --clean -o target/allure-report'
-					//powershell 'docker-compose run --rm allure:report'
-                    powershell 'docker-compose exec test allure generate /project/target/allure-results -o /project/target/site/allure-maven-plugin'
-                }
-		
+					allure([
+						includeProperties: false,
+						jdk: '',
+						properties: [],
+						reportBuildPolicy: 'ALWAYS',
+						results: [[path: 'target/allure-results']]
+						])
+			}
             }
         }
     }
