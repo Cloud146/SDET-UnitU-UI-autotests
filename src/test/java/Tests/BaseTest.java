@@ -45,7 +45,7 @@ public class BaseTest {
     }
 
     @Description("Открытие браузера с соответствующими настройками")
-    @BeforeMethod(enabled = true)
+    @BeforeMethod(enabled = false)
     public void browserSetUp(ITestContext context) throws IOException, IllegalAccessException {
         driver = DriverFactory.getWebDriver("chrome");
         driver.manage().window().setSize(new Dimension(configurationProvider.getScreenWidth(), configurationProvider.getScreenHeight()));
@@ -56,7 +56,7 @@ public class BaseTest {
     }
 
     @Description("Запуск тестов через Selenoid")
-    @BeforeMethod(enabled = false)
+    @BeforeMethod(enabled = true)
     public void selenoidSetUp() throws MalformedURLException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setBrowserName("chrome");
