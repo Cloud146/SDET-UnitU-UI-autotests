@@ -16,7 +16,7 @@ pipeline {
         steps {
             catchError {
                 script {
-					sh 'docker pull selenoid/vnc:chrome_127.0'
+					powershell 'docker pull selenoid/vnc:chrome_127.0'
                 }
             }
         }
@@ -25,17 +25,17 @@ pipeline {
             steps {
                 script {
 					step([$class: 'DockerComposeBuilder', dockerComposeFile: 'docker-compose.yml', option: [$class: 'StartService', scale: 1, service: 'selenoid'], useCustomDockerComposeFile: false])
-                    sh 'docker-compose ps'
-                    sh 'docker-compose logs selenoid'
-                    sh 'docker-compose logs selenoid-ui'
+                    powershell 'docker-compose ps'
+                    powershell 'docker-compose logs selenoid'
+                    powershell 'docker-compose logs selenoid-ui'
                 }
             }
         }
         stage('Run Tests') {
             steps {
                 script {
-                    sh 'docker-compose logs test'
-                    sh 'docker-compose -f /var/jenkins_home/workspace/est/estimate_probation/docker-compose.yml up test'
+                    powershell 'docker-compose logs test'
+                    powershell 'docker-compose -f /var/jenkins_home/workspace/est/estimate_probation/docker-compose.yml up test'
 					step([$class: 'DockerComposeBuilder', dockerComposeFile: 'docker-compose.yml', option: [$class: 'StopService', service: 'selenoid'], useCustomDockerComposeFile: false]) 
 				}
             }
@@ -43,7 +43,7 @@ pipeline {
         stage('Generate Allure Report') {
             steps {
                 script {
-                    sh 'docker-compose exec test allure generate /project/target/allure-results -o /project/target/allure-report'
+                    powershell 'docker-compose exec test allure generate /project/target/allure-results -o /project/target/allure-report'
                 }
             }
         }
