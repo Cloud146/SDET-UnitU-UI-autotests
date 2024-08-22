@@ -56,11 +56,11 @@ pipeline {
     }
     post {
         always {
-            archiveArtifacts artifacts: 'target/allure-report/**'
+            archiveArtifacts artifacts: 'allure-report/**'
             publishHTML([allowMissing: false,
                 alwaysLinkToLastBuild: false,
                 keepAll: true,
-                reportDir: 'target/allure-report',
+                reportDir: 'allure-report',
                 reportFiles: 'index.html',
                 reportName: 'Allure Report'
             ])
