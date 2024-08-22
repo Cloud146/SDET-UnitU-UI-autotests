@@ -35,7 +35,7 @@ pipeline {
             steps {
                 script {
                     powershell 'docker-compose logs test'
-                    powershell 'docker-compose -f /var/jenkins_home/workspace/est/docker-compose.yml up test'
+                    powershell 'docker-compose -f C:/ProgramData/Jenkins/.jenkins/workspace/Docker2_Test/docker-compose.yml up test'
 					step([$class: 'DockerComposeBuilder', dockerComposeFile: 'docker-compose.yml', option: [$class: 'StopService', service: 'selenoid'], useCustomDockerComposeFile: false]) 
 				}
             }
