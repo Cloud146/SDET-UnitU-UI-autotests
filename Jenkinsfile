@@ -44,8 +44,8 @@ pipeline {
             steps {
                 script {
 					//powershell 'allure generate target/allure-results --clean -o target/allure-report'
-					powershell 'docker-compose run --rm allure'
-                    //powershell 'docker-compose exec test allure generate /project/target/allure-results -o /project/target/allure-report'
+					//powershell 'docker-compose run --rm allure:report'
+                    powershell 'docker-compose exec test allure generate /project/target/allure-results -o /project/target/surefire-reports'
                 }
 		
             }
@@ -53,11 +53,11 @@ pipeline {
     }
     post {
         always {
-            archiveArtifacts artifacts: 'target/allure-report/**'
+            archiveArtifacts artifacts: 'target/surefire-reports/**'
             publishHTML([allowMissing: false,
                 alwaysLinkToLastBuild: false,
                 keepAll: true,
-                reportDir: 'target/allure-report',
+                reportDir: 'target/surefire-reports',
                 reportFiles: 'index.html',
                 reportName: 'Allure Report'
             ])
