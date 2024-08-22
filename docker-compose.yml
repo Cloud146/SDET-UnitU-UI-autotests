@@ -28,3 +28,11 @@ services:
     command: mvn clean test -P env_docker_selenoid
     links:
       - selenoid
+      
+  allure:
+    image: yegor256/allure-docker-service:latest
+    volumes:
+      - "./target/allure-results:/allure-results"
+      - "./target/allure-report:/allure-report"
+    entrypoint: ["allure", "generate", "/allure-results", "--clean", "-o", "/allure-report"]
+    network_mode: bridge

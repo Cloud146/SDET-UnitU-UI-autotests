@@ -43,7 +43,8 @@ pipeline {
         stage('Generate Allure Report') {
             steps {
                 script {
-					powershell 'allure generate target/allure-results --clean -o target/allure-report'
+					//powershell 'allure generate target/allure-results --clean -o target/allure-report'
+					powershell 'docker-compose run --rm allure'
                     //powershell 'docker-compose exec test allure generate /project/target/allure-results -o /project/target/allure-report'
                 }
 		
